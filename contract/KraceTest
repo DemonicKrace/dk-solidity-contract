@@ -1,0 +1,59 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
+
+contract KraceTest {
+    struct UserInfo1 {
+        address userAddress;
+        uint256[] ids;
+    }
+    mapping(address => UserInfo1) public userInfo1;
+
+    struct UserInfo2 {
+        address userAddress;
+        uint256[] ids;
+    }
+    mapping(address => UserInfo2) public userInfo2;
+
+    constructor() {
+        userInfo1[msg.sender].userAddress = msg.sender;
+        userInfo1[msg.sender].ids.push(1);
+        userInfo1[msg.sender].ids.push(2);
+
+        userInfo2[msg.sender].userAddress = msg.sender;
+        userInfo2[msg.sender].ids.push(1);
+        userInfo2[msg.sender].ids.push(2);
+
+        users.group = 1;
+        users.ids.push(User({
+            id: 1,
+            name: "kkk"
+        }));
+    }
+
+    function getUserInfo1(address user) public view returns (UserInfo1 memory) {
+        return userInfo1[user];
+    }
+
+    struct User {
+        uint256 id;
+        string name;
+    }
+
+    struct Users {
+        uint group;
+        User[] ids;
+    }
+
+    Users public users;
+
+
+    function getUsers() public view returns (Users memory) {
+        return users;
+    }
+
+    User[] public userArr;
+
+    function getUser(uint index) public view returns (User memory) {
+        return userArr[index];
+    }
+}
